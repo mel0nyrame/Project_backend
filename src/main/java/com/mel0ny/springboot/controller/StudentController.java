@@ -15,6 +15,12 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+
+    /**
+     * 获取所有学生的信息
+     *
+     * @return 学生的信息
+     */
     @GetMapping("/")
     public Result allUser() {
         return Result.success(studentService.getAllStudent());

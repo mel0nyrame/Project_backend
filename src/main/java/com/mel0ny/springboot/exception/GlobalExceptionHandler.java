@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public Result exceptionHandler(Exception exception) {
-        log.error("发生错误",exception);
+        log.error("发生错误,请查看日志",exception);
         return Result.error();
     }
 }

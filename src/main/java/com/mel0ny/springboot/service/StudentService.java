@@ -13,6 +13,11 @@ public class StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
+    /**
+     * 获取所有学生信息
+     *
+     * @return 所有学生的信息
+     */
     public List<Student> getAllStudent() {
         return studentMapper.allStudent();
     }
