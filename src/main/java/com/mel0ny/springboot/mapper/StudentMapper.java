@@ -16,5 +16,5 @@ public interface StudentMapper {
      * @return 学生集合
      */
     @Select("SELECT student_id,student_name,student_gender,student_birthday,student_phone,student_email,student_major FROM student")
-    List<Student> allStuent();
+    List<Student> allStudent();
 }

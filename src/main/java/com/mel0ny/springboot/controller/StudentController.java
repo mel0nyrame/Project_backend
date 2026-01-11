@@ -16,6 +16,6 @@ public class StudentController {
 
     @GetMapping("/")
     public Result allUser() {
-        return Result.success(studentMapper.allStuent());
+        return Result.success(studentMapper.allStudent());
     }
 }
