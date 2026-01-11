@@ -26,7 +26,7 @@ public class Score {
     表中字段:student_id,course_id,score
      */
 
-    private int studentId;
-    private int courseId;
+    private long studentId;
+    private long courseId;
     private double score;
 }

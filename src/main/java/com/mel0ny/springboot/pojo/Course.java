@@ -26,6 +26,6 @@ public class Course {
     表中字段:course_id,course_name
      */
 
-    private int courseId;
+    private long courseId;
     private String courseName;
 }
