@@ -1,27 +1,26 @@
 package com.mel0ny.springboot.controller;
 
 import com.mel0ny.springboot.pojo.Result;
-import com.mel0ny.springboot.service.StudentService;
+import com.mel0ny.springboot.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/student")
-public class StudentController {
+@RequestMapping("/api/course")
+public class CourseController {
 
     @Autowired
-    private StudentService studentService;
-
+    private CourseService courseService;
 
     /**
-     * 获取所有学生的信息
+     * 获取所有课程的信息
      *
-     * @return 学生的信息
+     * @return 所有课程的信息
      */
     @GetMapping("/")
-    public Result allStudent() {
-        return Result.success(studentService.getAllStudent());
+    public Result allCourse() {
+        return Result.success(courseService.getAllCourse());
     }
 }
