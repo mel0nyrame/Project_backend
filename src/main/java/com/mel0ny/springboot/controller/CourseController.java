@@ -21,6 +21,6 @@ public class CourseController {
      */
     @GetMapping("/")
     public Result allCourse() {
-        return Result.success(courseServiceImpl.getAllUser());
+        return Result.success(courseServiceImpl.getAllCourse());
     }
 }
