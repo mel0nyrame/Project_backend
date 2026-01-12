@@ -1,6 +1,5 @@
 package com.mel0ny.springboot.service;
 
-import com.mel0ny.springboot.pojo.Result;
 import com.mel0ny.springboot.pojo.Student;
 
 import java.util.List;
