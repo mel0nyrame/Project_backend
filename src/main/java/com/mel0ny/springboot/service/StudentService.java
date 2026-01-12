@@ -1,5 +1,6 @@
 package com.mel0ny.springboot.service;
 
+import com.mel0ny.springboot.pojo.Result;
 import com.mel0ny.springboot.pojo.Student;
 
 import java.util.List;
@@ -12,4 +13,9 @@ public interface StudentService {
      * @return 所有学生的信息
      */
     List<Student> getAllStudent();
+
+    /**
+     * 删除学生信息
+     */
+    void deleteStudent(Long studentId);
 }

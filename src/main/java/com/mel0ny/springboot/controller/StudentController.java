@@ -3,9 +3,7 @@ package com.mel0ny.springboot.controller;
 import com.mel0ny.springboot.pojo.Result;
 import com.mel0ny.springboot.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/student")
@@ -23,5 +21,17 @@ public class StudentController {
     @GetMapping("/")
     public Result allStudent() {
         return Result.success(studentServiceImpl.getAllStudent());
+    }
+
+    /**
+     * 删除学生信息
+     *
+     * @param studentId 学生学号
+     * @return Result类封装的成功结果
+     */
+    @DeleteMapping("/{studentId}")
+    public Result deleteStudent(@PathVariable Long studentId) {
+        studentServiceImpl.deleteStudent(studentId);
+        return Result.success();
     }
 }

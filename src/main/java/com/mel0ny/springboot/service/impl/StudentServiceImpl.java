@@ -1,10 +1,14 @@
 package com.mel0ny.springboot.service.impl;
 
+import com.mel0ny.springboot.exception.DataNoFoundException;
+import com.mel0ny.springboot.exception.OperationFailureException;
+import com.mel0ny.springboot.mapper.ScoreMapper;
 import com.mel0ny.springboot.mapper.StudentMapper;
 import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +18,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
+    @Autowired
+    private ScoreMapper scoreMapper;
+
     /**
      * 获得所有学生信息
      *
@@ -22,6 +29,31 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudent() {
         return studentMapper.allStudent();
+    }
+
+
+    /**
+     * 删除学生信息
+     * 附带事务回滚
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteStudent(Long studentId) {
+        //查询学生信息
+        Student student = studentMapper.selectStudentByStudentId(studentId);
+
+        //若学生信息不存在,则返回错误信息
+        if (student == null) {
+            throw new DataNoFoundException("学生数据未找到:" + studentId);
+        }
+
+        //删除学生信息
+        int row = scoreMapper.deleteScoreByStudentId(studentId);
+
+        //若变化行数为0,则表明操作失败
+        if (row == 0) {
+            throw new OperationFailureException("删除学生失败");
+        }
     }
 
 }
