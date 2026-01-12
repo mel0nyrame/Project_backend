@@ -1,7 +1,7 @@
 package com.mel0ny.springboot.controller;
 
 import com.mel0ny.springboot.pojo.Result;
-import com.mel0ny.springboot.service.StudentService;
+import com.mel0ny.springboot.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
     @Autowired
-    private StudentService studentService;
+    private StudentServiceImpl studentServiceImpl;
 
 
     /**
@@ -22,6 +22,6 @@ public class StudentController {
      */
     @GetMapping("/")
     public Result allStudent() {
-        return Result.success(studentService.getAllStudent());
+        return Result.success(studentServiceImpl.getAllStudent());
     }
 }

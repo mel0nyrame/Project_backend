@@ -1,7 +1,7 @@
 package com.mel0ny.springboot.controller;
 
 import com.mel0ny.springboot.pojo.Result;
-import com.mel0ny.springboot.service.CourseService;
+import com.mel0ny.springboot.service.impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
 
     @Autowired
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
 
     /**
      * 获取所有课程的信息
@@ -21,6 +21,6 @@ public class CourseController {
      */
     @GetMapping("/")
     public Result allCourse() {
-        return Result.success(courseService.getAllCourse());
+        return Result.success(courseServiceImpl.getAllUser());
     }
 }
