@@ -15,7 +15,7 @@ public class StudentServiceImpl implements StudentService {
     private StudentMapper studentMapper;
 
     /**
-     * 获取所有学生信息
+     * 获得所有学生信息
      *
      * @return 所有学生的信息
      */

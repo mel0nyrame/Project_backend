@@ -9,6 +9,11 @@ import java.util.List;
 @Mapper
 public interface CourseMapper {
 
+    /**
+     * 查询所有的课程信息
+     *
+     * @return 课程信息集合
+     */
     @Select("SELECT course_id,course_name FROM course")
     List<Course> allCourse();
 

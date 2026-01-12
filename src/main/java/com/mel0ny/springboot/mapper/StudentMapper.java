@@ -11,9 +11,9 @@ public interface StudentMapper {
 
 
     /**
-     * 查询所有学生
+     * 查询所有学生的信息
      *
-     * @return 学生集合
+     * @return 学生信息集合
      */
     @Select("SELECT student_id,student_name,student_gender,student_birthday,student_phone,student_email,student_major FROM student")
     List<Student> allStudent();

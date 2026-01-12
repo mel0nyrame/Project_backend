@@ -15,7 +15,7 @@ public class ScoreServiceImpl implements ScoreService {
     private ScoreMapper scoreMapper;
 
     /**
-     * 获得全部人的成绩信息
+     * 获取全部人的成绩信息
      *
      * @return 全部人的成绩信息
      */

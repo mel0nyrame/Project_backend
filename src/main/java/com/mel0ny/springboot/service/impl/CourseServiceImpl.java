@@ -15,7 +15,7 @@ public class CourseServiceImpl implements CourseService {
     private CourseMapper courseMapper;
 
     /**
-     * 获得全部的课程信息
+     * 获取全部的课程信息
      *
      * @return 全部的学生信息
      */
