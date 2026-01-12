@@ -36,4 +36,5 @@ public interface StudentMapper {
      */
     @Delete("DELETE FROM student WHERE student_id = #{studentId}")
     int deleteStudentByStudentId(Long studentId);
+
 }

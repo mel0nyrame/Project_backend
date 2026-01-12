@@ -42,12 +42,12 @@ public class StudentServiceImpl implements StudentService {
         //查询学生信息
         Student student = studentMapper.selectStudentByStudentId(studentId);
 
-        //若学生信息不存在,则返回错误信息
+        //若学生信息不存在,则抛出异常
         if (student == null) {
             throw new DataNoFoundException("学生数据未找到:" + studentId);
         }
 
-        //删除学生信息
+        //通过学号删除学生信息
         int row = scoreMapper.deleteScoreByStudentId(studentId);
 
         //若变化行数为0,则表明操作失败

@@ -23,4 +23,27 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> getAllScore() {
         return scoreMapper.allScore();
     }
+
+    /**
+     * 通过学生学号删除成绩
+     *
+     * @param studentId 学生学号
+     * @return 影响的行数
+     */
+
+    @Override
+    public int deleteScoreByStudentId(Long studentId) {
+        return scoreMapper.deleteScoreByStudentId(studentId);
+    }
+
+    /**
+     * 通过课程id删除成绩
+     *
+     * @param courseId 课程id
+     * @return 影响的行数
+     */
+    @Override
+    public int deleteScoreByCourseId(Long courseId) {
+        return scoreMapper.deleteScoreByCourseId(courseId);
+    }
 }

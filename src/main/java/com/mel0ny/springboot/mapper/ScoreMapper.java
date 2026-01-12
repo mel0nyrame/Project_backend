@@ -19,6 +19,24 @@ public interface ScoreMapper {
     List<Score> allScore();
 
     /**
+     * 通过学生学号查看成绩数目
+     *
+     * @param studentId 学生学号
+     * @return 成绩数目
+     */
+    @Select("SELECT COUNT(*) FROM score WHERE student_id = #{studentId}")
+    int selectCountByStudentId(Long studentId);
+
+    /**
+     * 通过课程id查看成绩数目.
+     *
+     * @param courseId 课程id
+     * @return 成绩数目
+     */
+    @Select("SELECT COUNT(*) FROM score WHERE course_id = #{courseId}")
+    int selectCountByCourseId(Long courseId);
+
+    /**
      * 通过学生学号查询学生成绩
      *
      * @param studentId 学生学号
@@ -33,6 +51,17 @@ public interface ScoreMapper {
      * @param studentId 学生学号
      * @return 影响的行数
      */
-    @Delete("DELETE FROM student WHERE student_id = #{studentId}")
+    @Delete("DELETE FROM score WHERE student_id = #{studentId}")
     int deleteScoreByStudentId(Long studentId);
+
+
+    /**
+     * 通过课程id删除成绩
+     *
+     * @param courseId 课程id
+     * @return 影响的行数
+     */
+    @Delete("DELETE FROM score WHERE course_id = #{courseId}")
+    int deleteScoreByCourseId(Long courseId);
+
 }

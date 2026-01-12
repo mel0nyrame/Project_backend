@@ -12,4 +12,9 @@ public interface CourseService {
      * @return 全部的学生信息
      */
     List<Course> getAllCourse();
+
+    /**
+     * 删除课程信息
+     */
+    void deleteCourse(Long courseId);
 }
