@@ -14,9 +14,19 @@ public interface StudentService {
     List<Student> getAllStudent();
 
     /**
-     * 删除学生信息
+     * 通过学生学号查询学生信息
+     *
+     * @param studentId 学生学号
+     * @return 学生对象
      */
-    void deleteStudent(Long studentId);
+    Student selectStudentByStudentId(Long studentId);
+
+    /**
+     * 通过学生学号删除学生信息
+     *
+     * @param studentId 学生学号
+     */
+    void deleteStudentByStudentId(Long studentId);
 
     /**
      * 通过学生学号更新学生信息

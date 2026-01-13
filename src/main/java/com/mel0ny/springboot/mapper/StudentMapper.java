@@ -42,7 +42,7 @@ public interface StudentMapper {
      *
      * @param studentId 学生学号
      * @param student   学生对象
-     * @return 变化的行数
+     * @return 影响的行数
      */
     int updateStudentByStudentId(Long studentId,Student student);
 

@@ -37,4 +37,13 @@ public interface CourseMapper {
     @Delete("DELETE FROM course WHERE course_id = #{courseId}")
     int deleteCourseByCourseId(Long courseId);
 
+    /**
+     * 通过课程id更新课程信息
+     *
+     * @param courseId 课程id
+     * @param course   课程信息对象
+     * @return 影响的行数
+     */
+    int updateCourseByCourseId(Long courseId,Course course);
+
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mel0ny.springboot.mapper.CourseMapper">
+    <update id="updateCourseByCourseId">
+        UPDATE course
+        <set>
+            <if test="course.courseId != null and course.courseId != '">
+                course_id = #{course.courseId}
+            </if>
+            <if test="course.courseName != null and course.courseName != ''">
+                course_name = #{course.courseName}
+            </if>
+        </set>
+        WHERE course_id = #{courseId}
+    </update>
+</mapper>

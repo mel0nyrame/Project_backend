@@ -1,6 +1,7 @@
 package com.mel0ny.springboot.service;
 
 import com.mel0ny.springboot.pojo.Course;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -14,7 +15,25 @@ public interface CourseService {
     List<Course> getAllCourse();
 
     /**
-     * 删除课程信息
+     * 通过课程id查询课程信息
+     *
+     * @param courseId 课程id
+     * @return 课程对象
      */
-    void deleteCourse(Long courseId);
+    @Select("SELECT course_id,course_name FROM course")
+    Course selectCourseByCourseId(Long courseId);
+
+    /**
+     * 删除课程信息
+     *
+     * @param courseId 课程id
+     */
+    void deleteCourseByCourseId(Long courseId);
+
+    /**
+     * 更新课程信息
+     *
+     * @param courseId 学生学号
+     */
+    void updateCourseByCourseId(Long courseId,Course course);
 }

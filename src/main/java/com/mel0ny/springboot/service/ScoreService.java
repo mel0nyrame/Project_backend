@@ -1,6 +1,8 @@
 package com.mel0ny.springboot.service;
 
+import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Score;
+import com.mel0ny.springboot.pojo.Student;
 
 import java.util.List;
 
@@ -36,4 +38,22 @@ public interface ScoreService {
      * @return 影响的行数
      */
     int deleteScoreByCourseId(Long courseId);
+
+    /**
+     * 通过课程id更新成绩
+     *
+     * @param courseId 课程id
+     * @param course   课程对象
+     * @return 影响的行数
+     */
+    int updateScoreByCourseId(Long courseId, Course course);
+
+    /**
+     * 通过学生学号更新成绩
+     *
+     * @param studentId 学生id
+     * @param student   学生对象
+     * @return 影响的行数
+     */
+    int updateScoreByStudentId(Long studentId, Student student);
 }

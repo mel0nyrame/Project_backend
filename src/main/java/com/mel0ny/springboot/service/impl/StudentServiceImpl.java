@@ -31,6 +31,17 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.allStudent();
     }
 
+    /**
+     * 通过学生学号查询学生信息
+     *
+     * @param studentId 学生学号
+     * @return 学生对象
+     */
+    @Override
+    public Student selectStudentByStudentId(Long studentId) {
+        return studentMapper.selectStudentByStudentId(studentId);
+    }
+
 
     /**
      * 删除学生信息
@@ -38,7 +49,7 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteStudent(Long studentId) {
+    public void deleteStudentByStudentId(Long studentId) {
         //查询学生信息
         Student student = studentMapper.selectStudentByStudentId(studentId);
 
@@ -48,18 +59,18 @@ public class StudentServiceImpl implements StudentService {
         }
 
         //通过学号删除学生成绩信息
-        int ScoreRow = scoreMapper.deleteScoreByStudentId(studentId);
+        int scoreRow = scoreMapper.deleteScoreByStudentId(studentId);
 
         //若变化行数为0,则表明操作失败
-        if (ScoreRow == 0) {
+        if (scoreRow == 0) {
             throw new OperationFailureException("删除学生失败");
         }
 
         //通过学号删除学生信息
-        int StudentRow = studentMapper.deleteStudentByStudentId(studentId);
+        int studentRow = studentMapper.deleteStudentByStudentId(studentId);
 
         //若变化行数为0,则表明操作失败
-        if (StudentRow == 0) {
+        if (studentRow == 0) {
             throw new OperationFailureException("删除学生失败");
         }
     }
@@ -68,15 +79,33 @@ public class StudentServiceImpl implements StudentService {
      * 通过学生学号更新学生信息
      *
      * @param studentId 学生学号
-     * @param student   学生信息
+     * @param student   学生信息对象
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateStudentByStudentId(Long studentId, Student student) {
-        int row = studentMapper.updateStudentByStudentId(studentId, student);
+        //查询学生信息
+        Student selectStudent = studentMapper.selectStudentByStudentId(studentId);
 
-        if (row == 0) {
+        //若学生信息不存在,则抛出异常
+        if (selectStudent == null) {
+            throw new DataNoFoundException("未找到学生:" + studentId);
+        }
+
+        //通过学号更新学生基本信息
+        int studentRow = studentMapper.updateStudentByStudentId(studentId, student);
+
+        //若变化行数为0,则表明操作失败
+        if (studentRow == 0) {
             throw new OperationFailureException("更新学生失败");
+        }
+
+        //通过学号更新学生成绩信息
+        int scoreRow = scoreMapper.updateScoreByStudentId(studentId, student);
+
+        //若更新的行数不等于成绩行数,则表明操作失败
+        if (scoreRow != scoreMapper.selectCountByStudentId(studentId)) {
+            throw new OperationFailureException("更新学生成绩失败");
         }
     }
 

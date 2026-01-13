@@ -32,12 +32,23 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
+     * 通过课程id查询课程信息
+     *
+     * @param courseId 课程id
+     * @return 课程对象
+     */
+    @Override
+    public Course selectCourseByCourseId(Long courseId) {
+        return courseMapper.selectCourseByCourseId(courseId);
+    }
+
+    /**
      * 删除学生信息
      * 附带事务回滚
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteCourse(Long courseId) {
+    public void deleteCourseByCourseId(Long courseId) {
         //查询课程信息
         Course course = courseMapper.selectCourseByCourseId(courseId);
 
@@ -50,7 +61,7 @@ public class CourseServiceImpl implements CourseService {
         int scoreRow = scoreMapper.deleteScoreByCourseId(courseId);
 
         //若变化的行数小于成绩的行数,则表明操作失败
-        if (scoreRow < scoreMapper.selectCountByCourseId(courseId)) {
+        if (scoreRow != scoreMapper.selectCountByCourseId(courseId)) {
             throw new OperationFailureException("删除成绩失败,操作成功的数目小于原有的数目");
         }
 
@@ -60,6 +71,40 @@ public class CourseServiceImpl implements CourseService {
         //如果变化行数为0,则表明操作失败
         if (courseRow == 0) {
             throw new OperationFailureException("删除课程失败");
+        }
+    }
+
+    /**
+     * 更新课程信息
+     *
+     * @param courseId 学生学号
+     * @param course 课程对象
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateCourseByCourseId(Long courseId,Course course) {
+        //查询课程信息
+        Course selectCourse = courseMapper.selectCourseByCourseId(courseId);
+
+        //若课程信息不存在,则抛出异常
+        if (selectCourse == null) {
+            throw new DataNoFoundException("课程信息未找到:" + courseId);
+        }
+
+        //通过课程id更新课程
+        int courseRow = courseMapper.updateCourseByCourseId(courseId, course);
+
+        //如果变化行数为0,则表明操作失败
+        if (courseRow == 0) {
+            throw new OperationFailureException("更新课程信息失败");
+        }
+
+        //通过课程id更新成绩
+        int scoreRow = scoreMapper.updateScoreByCourseId(courseId, course);
+
+        //如果变化行数不等于实际的成绩行数,则操作失败
+        if (scoreRow != scoreMapper.selectCountByCourseId(courseId)) {
+            throw new OperationFailureException("更新成绩信息失败");
         }
     }
 }

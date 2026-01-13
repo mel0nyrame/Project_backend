@@ -26,6 +26,17 @@ public class StudentController {
     }
 
     /**
+     * 获取学生信息
+     *
+     * @param studentId 学生学号
+     * @return Result类封装的学生对象
+     */
+    @GetMapping("/{studentId}")
+    public Result selectStudent(@PathVariable Long studentId) {
+        return Result.success(studentServiceImpl.selectStudentByStudentId(studentId));
+    }
+
+    /**
      * 删除学生信息
      *
      * @param studentId 学生学号
@@ -33,10 +44,17 @@ public class StudentController {
      */
     @DeleteMapping("/{studentId}")
     public Result deleteStudent(@PathVariable Long studentId) {
-        studentServiceImpl.deleteStudent(studentId);
+        studentServiceImpl.deleteStudentByStudentId(studentId);
         return Result.success();
     }
 
+    /**
+     * 更新学生信息
+     *
+     * @param studentId 学生学号
+     * @param student   学生对象
+     * @return Result类封装的成功结果
+     */
     @PutMapping("/{studentId}")
     public Result updateStudent(@PathVariable Long studentId, @RequestBody Student student) {
         studentServiceImpl.updateStudentByStudentId(studentId, student);

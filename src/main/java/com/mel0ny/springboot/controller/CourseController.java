@@ -22,9 +22,15 @@ public class CourseController {
         return Result.success(courseServiceImpl.getAllCourse());
     }
 
+    /**
+     * 根据课程id删除课程信息
+     *
+     * @param courseId 课程id
+     * @return Result封装的成功结果
+     */
     @DeleteMapping("/{courseId}")
     public Result deleteCourse(@PathVariable Long courseId) {
-        courseServiceImpl.deleteCourse(courseId);
+        courseServiceImpl.deleteCourseByCourseId(courseId);
         return Result.success();
     }
 }
