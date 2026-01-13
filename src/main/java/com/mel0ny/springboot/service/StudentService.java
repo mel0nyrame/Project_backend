@@ -25,5 +25,5 @@ public interface StudentService {
      * @param student   学生信息
      * @return 变化的行数
      */
-    int updateStudentByStudentId(Long studentId,Student student);
+    void updateStudentByStudentId(Long studentId,Student student);
 }

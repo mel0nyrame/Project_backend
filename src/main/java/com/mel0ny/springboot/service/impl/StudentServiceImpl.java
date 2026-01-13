@@ -72,8 +72,13 @@ public class StudentServiceImpl implements StudentService {
      * @return 变化的行数
      */
     @Override
-    public int updateStudentByStudentId(Long studentId, Student student) {
-        return studentMapper.updateStudentByStudentId(studentId, student);
+    @Transactional(rollbackFor = Exception.class)
+    public void updateStudentByStudentId(Long studentId, Student student) {
+        int row = studentMapper.updateStudentByStudentId(studentId, student);
+
+        if (row == 0) {
+            throw new OperationFailureException("更新学生失败");
+        }
     }
 
 }
