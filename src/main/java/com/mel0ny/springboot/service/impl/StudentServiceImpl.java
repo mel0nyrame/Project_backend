@@ -47,11 +47,19 @@ public class StudentServiceImpl implements StudentService {
             throw new DataNoFoundException("学生数据未找到:" + studentId);
         }
 
-        //通过学号删除学生信息
-        int row = scoreMapper.deleteScoreByStudentId(studentId);
+        //通过学号删除学生成绩信息
+        int ScoreRow = scoreMapper.deleteScoreByStudentId(studentId);
 
         //若变化行数为0,则表明操作失败
-        if (row == 0) {
+        if (ScoreRow == 0) {
+            throw new OperationFailureException("删除学生失败");
+        }
+
+        //通过学号删除学生信息
+        int StudentRow = studentMapper.deleteStudentByStudentId(studentId);
+
+        //若变化行数为0,则表明操作失败
+        if (StudentRow == 0) {
             throw new OperationFailureException("删除学生失败");
         }
     }

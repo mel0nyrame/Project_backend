@@ -14,6 +14,14 @@ public interface ScoreService {
     List<Score> getAllScore();
 
     /**
+     * 通过学生学号查询学生成绩
+     *
+     * @param studentId 学生学号
+     * @return 成绩对象
+     */
+    Score selectScoreByStudentId(Long studentId);
+
+    /**
      * 通过学生学号删除成绩
      *
      * @param studentId 学生学号

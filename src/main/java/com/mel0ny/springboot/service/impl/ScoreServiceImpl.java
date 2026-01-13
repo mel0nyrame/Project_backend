@@ -25,6 +25,17 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     /**
+     * 通过学生学号查询学生成绩
+     *
+     * @param studentId 学生学号
+     * @return 成绩对象
+     */
+    @Override
+    public Score selectScoreByStudentId(Long studentId) {
+        return scoreMapper.selectScoreByStudentId(studentId);
+    }
+
+    /**
      * 通过学生学号删除成绩
      *
      * @param studentId 学生学号
