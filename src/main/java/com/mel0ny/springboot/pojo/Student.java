@@ -24,11 +24,11 @@ public class Student {
     表中字段:student_id,student_name,student_gender,student_birthday,student_phone,student_email,student_major
      */
 
-    private long studentId;
+    private Long studentId;
     private String studentName;
     private String studentGender;
     private String studentBirthday;
-    private long studentPhone;
+    private Long studentPhone;
     private String studentEmail;
     private String studentMajor;
 }
