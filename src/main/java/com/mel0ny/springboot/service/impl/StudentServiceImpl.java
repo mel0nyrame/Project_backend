@@ -69,7 +69,6 @@ public class StudentServiceImpl implements StudentService {
      *
      * @param studentId 学生学号
      * @param student   学生信息
-     * @return 变化的行数
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
