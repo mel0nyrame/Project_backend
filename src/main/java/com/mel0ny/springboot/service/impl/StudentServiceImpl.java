@@ -64,4 +64,16 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
+    /**
+     * 通过学生学号更新学生信息
+     *
+     * @param studentId 学生学号
+     * @param student   学生信息
+     * @return 变化的行数
+     */
+    @Override
+    public int updateStudentByStudentId(Long studentId, Student student) {
+        return studentMapper.updateStudentByStudentId(studentId, student);
+    }
+
 }

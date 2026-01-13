@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mel0ny.springboot.mapper.StudentMapper">
+    <update id="updateStudentByStudentId">
+        UPDATE student
+        <set>
+            <if test="student.studentName != null and student.studentName != ''">
+                student_name = #{student.studentName},
+            </if>
+            <if test="student.studentGender != null and student.studentGender != ''">
+                student_gender = #{student.studentGender},
+            </if>
+            <if test="student.studentBirthday != null">
+                student_birthday = #{student.studentBirthday},
+            </if>
+            <if test="student.studentPhone != null and student.studentPhone != ''">
+                student_phone = #{student.studentPhone},
+            </if>
+            <if test="student.studentEmail != null and student.studentEmail != ''">
+                student_email = #{student.studentEmail},
+            </if>
+            <if test="student.studentMajor != null and student.studentMajor != ''">
+                student_major = #{student.studentMajor},
+            </if>
+        </set>
+        WHERE student_id = #{studentId}
+    </update>
+</mapper>

@@ -17,4 +17,13 @@ public interface StudentService {
      * 删除学生信息
      */
     void deleteStudent(Long studentId);
+
+    /**
+     * 通过学生学号更新学生信息
+     *
+     * @param studentId 学生学号
+     * @param student   学生信息
+     * @return 变化的行数
+     */
+    int updateStudentByStudentId(Long studentId,Student student);
 }

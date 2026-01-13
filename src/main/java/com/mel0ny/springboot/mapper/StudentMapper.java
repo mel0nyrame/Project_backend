@@ -4,6 +4,7 @@ import com.mel0ny.springboot.pojo.Student;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -36,5 +37,14 @@ public interface StudentMapper {
      */
     @Delete("DELETE FROM student WHERE student_id = #{studentId}")
     int deleteStudentByStudentId(Long studentId);
+
+    /**
+     * 通过学生学号更新学生信息
+     *
+     * @param studentId 学生学号
+     * @param student   学生对象
+     * @return 变化的行数
+     */
+    int updateStudentByStudentId(Long studentId,Student student);
 
 }

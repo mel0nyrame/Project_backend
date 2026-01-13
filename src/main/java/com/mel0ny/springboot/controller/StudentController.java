@@ -1,6 +1,7 @@
 package com.mel0ny.springboot.controller;
 
 import com.mel0ny.springboot.pojo.Result;
+import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,12 @@ public class StudentController {
     @DeleteMapping("/{studentId}")
     public Result deleteStudent(@PathVariable Long studentId) {
         studentServiceImpl.deleteStudent(studentId);
+        return Result.success();
+    }
+
+    @PutMapping("/{studentId}")
+    public Result updateStudent(@PathVariable Long studentId, @RequestBody Student student) {
+        studentServiceImpl.updateStudentByStudentId(studentId, student);
         return Result.success();
     }
 }
