@@ -40,4 +40,14 @@
         </set>
         WHERE student_id = #{studentId}
     </update>
+
+    <update id="updateScoreByIds">
+        UPDATE score
+        <set>
+            <if test="score.score != null and score.score != ''">
+                score = #{score.score},
+            </if>
+        </set>
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </update>
 </mapper>

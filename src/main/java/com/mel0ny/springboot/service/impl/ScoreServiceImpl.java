@@ -1,5 +1,6 @@
 package com.mel0ny.springboot.service.impl;
 
+import com.mel0ny.springboot.exception.OperationFailureException;
 import com.mel0ny.springboot.mapper.ScoreMapper;
 import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Score;
@@ -7,6 +8,7 @@ import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -84,4 +86,22 @@ public class ScoreServiceImpl implements ScoreService {
     public int updateScoreByStudentId(Long studentId, Student student) {
         return scoreMapper.updateScoreByStudentId(studentId, student);
     }
+
+    /**
+     * 根据主键更新学生成绩
+     *
+     * @param studentId 学生学号
+     * @param courseId  课程id
+     * @param score     成绩对象
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateScoreByIds(Integer studentId, Integer courseId, Score score) {
+        int row = scoreMapper.updateScoreByIds(studentId, courseId, score);
+
+        if (row == 0) {
+            throw new OperationFailureException("操作失败");
+        }
+    }
+
 }

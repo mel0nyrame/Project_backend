@@ -1,14 +1,15 @@
 package com.mel0ny.springboot.controller;
 
 import com.mel0ny.springboot.pojo.Result;
+import com.mel0ny.springboot.pojo.Score;
+import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.impl.ScoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/score")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ScoreController {
 
     @Autowired
@@ -22,5 +23,19 @@ public class ScoreController {
     @GetMapping("/")
     public Result allScore() {
         return Result.success(scoreServiceImpl.getAllScore());
+    }
+
+    /**
+     * 根据主键更新学生成绩
+     *
+     * @param studentId 学生学号
+     * @param courseId  课程id
+     * @param score     成绩对象
+     * @return Result封装的成功结果
+     */
+    @PutMapping("/{studentId}/{courseId}")
+    public Result updateScore(@PathVariable Integer studentId, @PathVariable Integer courseId, @RequestBody Score score) {
+        scoreServiceImpl.updateScoreByIds(studentId, courseId, score);
+        return Result.success();
     }
 }

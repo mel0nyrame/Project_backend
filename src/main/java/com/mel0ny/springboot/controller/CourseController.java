@@ -1,5 +1,6 @@
 package com.mel0ny.springboot.controller;
 
+import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Result;
 import com.mel0ny.springboot.service.impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/course")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CourseController {
 
     @Autowired
@@ -31,6 +33,19 @@ public class CourseController {
     @DeleteMapping("/{courseId}")
     public Result deleteCourse(@PathVariable Long courseId) {
         courseServiceImpl.deleteCourseByCourseId(courseId);
+        return Result.success();
+    }
+
+    /**
+     * 根据课程id更新课程信息
+     *
+     * @param courseId 课程id
+     * @param course   课程对象
+     * @return Result封装的成功结果
+     */
+    @PutMapping("/{courseId}")
+    public Result updateCourse(@PathVariable Long courseId, @RequestBody Course course) {
+        courseServiceImpl.updateCourseByCourseId(courseId,course);
         return Result.success();
     }
 }

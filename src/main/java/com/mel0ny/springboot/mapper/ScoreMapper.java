@@ -84,4 +84,14 @@ public interface ScoreMapper {
      */
     int updateScoreByStudentId(Long studentId, Student student);
 
+    /**
+     * 根据主键更新学生成绩
+     *
+     * @param studentId 学生学号
+     * @param courseId  课程id
+     * @param score     成绩对象
+     * @return 影响的行数
+     */
+    int updateScoreByIds(Integer studentId,Integer courseId,Score score);
+
 }
