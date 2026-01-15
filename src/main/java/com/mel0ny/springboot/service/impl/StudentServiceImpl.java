@@ -1,11 +1,15 @@
 package com.mel0ny.springboot.service.impl;
 
+import com.mel0ny.springboot.exception.DataErrorException;
 import com.mel0ny.springboot.exception.DataNoFoundException;
 import com.mel0ny.springboot.exception.OperationFailureException;
+import com.mel0ny.springboot.mapper.CourseMapper;
 import com.mel0ny.springboot.mapper.ScoreMapper;
 import com.mel0ny.springboot.mapper.StudentMapper;
+import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.StudentService;
+import com.mel0ny.springboot.utils.DataCheckUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +24,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private ScoreMapper scoreMapper;
+
+    @Autowired
+    private DataCheckUtil dataCheckUtil;
+
+    @Autowired
+    private CourseMapper courseMapper;
 
     /**
      * 获得所有学生信息
@@ -90,6 +100,12 @@ public class StudentServiceImpl implements StudentService {
         //若学生信息不存在,则抛出异常
         if (selectStudent == null) {
             throw new DataNoFoundException("未找到学生:" + studentId);
+        }
+
+        //检查字段合法性
+        String errorMsg = dataCheckUtil.studentChecker(student);
+        if (errorMsg != null) {
+            throw new DataErrorException(errorMsg);
         }
 
         //通过学号更新学生基本信息

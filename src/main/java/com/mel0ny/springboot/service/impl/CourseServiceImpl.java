@@ -1,11 +1,13 @@
 package com.mel0ny.springboot.service.impl;
 
+import com.mel0ny.springboot.exception.DataErrorException;
 import com.mel0ny.springboot.exception.DataNoFoundException;
 import com.mel0ny.springboot.exception.OperationFailureException;
 import com.mel0ny.springboot.mapper.CourseMapper;
 import com.mel0ny.springboot.mapper.ScoreMapper;
 import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.service.CourseService;
+import com.mel0ny.springboot.utils.DataCheckUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private ScoreMapper scoreMapper;
+
+    @Autowired
+    private DataCheckUtil dataCheckUtil;
 
     /**
      * 获取全部的课程信息
@@ -84,6 +89,12 @@ public class CourseServiceImpl implements CourseService {
         //若课程信息不存在,则抛出异常
         if (selectCourse == null) {
             throw new DataNoFoundException("课程信息未找到:" + courseId);
+        }
+
+        //检查字段合法性
+        String errorMsg = dataCheckUtil.courseChecker(course);
+        if (errorMsg != null) {
+            throw new DataErrorException(errorMsg);
         }
 
         //通过课程id更新课程

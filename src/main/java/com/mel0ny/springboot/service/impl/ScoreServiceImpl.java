@@ -1,11 +1,13 @@
 package com.mel0ny.springboot.service.impl;
 
+import com.mel0ny.springboot.exception.DataErrorException;
 import com.mel0ny.springboot.exception.OperationFailureException;
 import com.mel0ny.springboot.mapper.ScoreMapper;
 import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Score;
 import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.ScoreService;
+import com.mel0ny.springboot.utils.DataCheckUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Autowired
     private ScoreMapper scoreMapper;
+
+    @Autowired
+    private DataCheckUtil dataCheckUtil;
 
     /**
      * 获取全部人的成绩信息
@@ -97,6 +102,13 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateScoreByIds(Integer studentId, Integer courseId, Score score) {
+
+        //检查字段合法性
+        String errorMsg = dataCheckUtil.scoreChecker(score);
+        if (errorMsg != null) {
+            throw new DataErrorException(errorMsg);
+        }
+
         int row = scoreMapper.updateScoreByIds(studentId, courseId, score);
 
         if (row == 0) {
