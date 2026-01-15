@@ -38,4 +38,16 @@ public class ScoreController {
         scoreServiceImpl.updateScoreByIds(studentId, courseId, score);
         return Result.success();
     }
+
+    /**
+     * 通过学生学号删除成绩
+     *
+     * @param studentId 学生学号
+     * @return Result封装的成功结果
+     */
+    @DeleteMapping("/{studentId}")
+    public Result deleteScore(@PathVariable Long studentId){
+        scoreServiceImpl.deleteScoreByStudentId(studentId);
+        return Result.success();
+    }
 }

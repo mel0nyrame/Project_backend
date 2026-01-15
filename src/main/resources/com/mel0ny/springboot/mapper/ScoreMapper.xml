@@ -19,23 +19,8 @@
     <update id="updateScoreByStudentId">
         UPDATE score
         <set>
-            <if test="student.studentName != null and student.studentName != ''">
-                student_name = #{student.studentName},
-            </if>
-            <if test="student.studentGender != null and student.studentGender != ''">
-                student_gender = #{student.studentGender},
-            </if>
-            <if test="student.studentBirthday != null">
-                student_birthday = #{student.studentBirthday},
-            </if>
-            <if test="student.studentPhone != null and student.studentPhone != ''">
-                student_phone = #{student.studentPhone},
-            </if>
-            <if test="student.studentEmail != null and student.studentEmail != ''">
-                student_email = #{student.studentEmail},
-            </if>
-            <if test="student.studentMajor != null and student.studentMajor != ''">
-                student_major = #{student.studentMajor},
+            <if test="student.studentId != null and student.studentId != ''">
+                student_id = #{studentId},
             </if>
         </set>
         WHERE student_id = #{studentId}

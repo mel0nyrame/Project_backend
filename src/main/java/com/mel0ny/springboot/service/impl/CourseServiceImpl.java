@@ -58,12 +58,7 @@ public class CourseServiceImpl implements CourseService {
         }
 
         //通过课程id删除成绩
-        int scoreRow = scoreMapper.deleteScoreByCourseId(courseId);
-
-        //若变化的行数小于成绩的行数,则表明操作失败
-        if (scoreRow != scoreMapper.selectCountByCourseId(courseId)) {
-            throw new OperationFailureException("删除成绩失败,操作成功的数目小于原有的数目");
-        }
+        scoreMapper.deleteScoreByCourseId(courseId);
 
         //通过课程id删除课程
         int courseRow = courseMapper.deleteCourseByCourseId(courseId);
