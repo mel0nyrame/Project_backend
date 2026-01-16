@@ -2,7 +2,6 @@ package com.mel0ny.springboot.controller;
 
 import com.mel0ny.springboot.pojo.Result;
 import com.mel0ny.springboot.pojo.Score;
-import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.impl.ScoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
