@@ -1,8 +1,11 @@
 package com.mel0ny.springboot.service.impl;
 
 import com.mel0ny.springboot.exception.DataErrorException;
+import com.mel0ny.springboot.exception.DataNoFoundException;
 import com.mel0ny.springboot.exception.OperationFailureException;
+import com.mel0ny.springboot.mapper.CourseMapper;
 import com.mel0ny.springboot.mapper.ScoreMapper;
+import com.mel0ny.springboot.mapper.StudentMapper;
 import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Score;
 import com.mel0ny.springboot.pojo.Student;
@@ -22,6 +25,10 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Autowired
     private DataCheckUtil dataCheckUtil;
+    @Autowired
+    private CourseMapper courseMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
     /**
      * 获取全部人的成绩信息
@@ -123,6 +130,32 @@ public class ScoreServiceImpl implements ScoreService {
         }
 
         int row = scoreMapper.updateScoreByIds(studentId, courseId, score);
+
+        if (row == 0) {
+            throw new OperationFailureException("操作失败");
+        }
+    }
+
+    /**
+     * 新增成绩
+     *
+     * @param score 成绩对象
+     */
+    @Override
+    public void insertScore(Score score) {
+        Course selectCourse = courseMapper.selectCourseByCourseId(score.getCourseId());
+
+        if (selectCourse == null) {
+            throw new DataNoFoundException("课程未找到:" + score.getCourseId());
+        }
+
+        Student selectStudent = studentMapper.selectStudentByStudentId(score.getStudentId());
+
+        if (selectStudent == null) {
+            throw new DataNoFoundException("学生未找到+" + score.getStudentId());
+        }
+
+        int row = scoreMapper.insertScore(score);
 
         if (row == 0) {
             throw new OperationFailureException("操作失败");

@@ -74,4 +74,11 @@ public interface ScoreService {
      */
     void updateScoreByIds(Integer studentId,Integer courseId,Score score);
 
+    /**
+     * 新增成绩
+     *
+     * @param score 成绩对象
+     */
+    void insertScore(Score score);
+
 }

@@ -62,4 +62,10 @@ public class CourseController {
         courseServiceImpl.updateCourseByCourseId(courseId,course);
         return Result.success();
     }
+
+    @PostMapping("/")
+    public Result insertCourse(@RequestBody Course course) {
+        courseServiceImpl.insertCourse(course);
+        return Result.success();
+    }
 }

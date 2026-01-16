@@ -44,4 +44,11 @@ public interface CourseService {
      * @param courseId 学生学号
      */
     void updateCourseByCourseId(Long courseId,Course course);
+
+    /**
+     * 插入课程
+     *
+     * @param course 课程对象
+     */
+    void insertCourse(Course course);
 }

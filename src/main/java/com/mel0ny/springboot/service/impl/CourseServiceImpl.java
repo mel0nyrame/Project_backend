@@ -126,4 +126,30 @@ public class CourseServiceImpl implements CourseService {
             throw new OperationFailureException("更新成绩信息失败");
         }
     }
+
+    /**
+     * 插入课程
+     *
+     * @param course 课程对象
+     */
+    @Override
+    public void insertCourse(Course course) {
+        Course selectCourse = courseMapper.selectCourseByCourseId(course.getCourseId());
+
+        if (selectCourse != null) {
+            throw new DataErrorException("数据重复");
+        }
+
+        //检查字段合法性
+        String errorMsg = dataCheckUtil.courseChecker(course);
+        if (errorMsg != null) {
+            throw new DataErrorException(errorMsg);
+        }
+
+        int row = courseMapper.insertCourse(course);
+
+        if (row == 0) {
+            throw new OperationFailureException("操作失败");
+        }
+    }
 }

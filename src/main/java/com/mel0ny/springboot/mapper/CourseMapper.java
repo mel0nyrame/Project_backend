@@ -2,6 +2,7 @@ package com.mel0ny.springboot.mapper;
 
 import com.mel0ny.springboot.pojo.Course;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -53,5 +54,8 @@ public interface CourseMapper {
      * @return 影响的行数
      */
     int updateCourseByCourseId(Long courseId,Course course);
+
+    @Insert("INSERT INTO course VALUES(#{courseId},#{courseName})")
+    int insertCourse(Course course);
 
 }

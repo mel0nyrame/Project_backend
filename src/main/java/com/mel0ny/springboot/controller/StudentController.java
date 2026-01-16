@@ -74,4 +74,10 @@ public class StudentController {
         studentServiceImpl.updateStudentByStudentId(studentId, student);
         return Result.success();
     }
+
+    @PostMapping("/")
+    public Result insertStudent(@RequestBody Student student) {
+        studentServiceImpl.insertStudent(student);
+        return Result.success();
+    }
 }

@@ -43,4 +43,11 @@ public interface StudentService {
      * @param student   学生信息
      */
     void updateStudentByStudentId(Long studentId,Student student);
+
+    /**
+     * 插入学生
+     *
+     * @param student 学生对象
+     */
+    void insertStudent(Student student);
 }

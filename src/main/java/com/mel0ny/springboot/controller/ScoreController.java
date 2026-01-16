@@ -63,4 +63,10 @@ public class ScoreController {
         scoreServiceImpl.deleteScoreByStudentId(studentId);
         return Result.success();
     }
+
+    @PostMapping("/")
+    public Result insertScore(@RequestBody Score score) {
+        scoreServiceImpl.insertScore(score);
+        return Result.success();
+    }
 }

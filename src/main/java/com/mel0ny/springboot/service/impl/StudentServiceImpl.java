@@ -3,8 +3,10 @@ package com.mel0ny.springboot.service.impl;
 import com.mel0ny.springboot.exception.DataErrorException;
 import com.mel0ny.springboot.exception.DataNoFoundException;
 import com.mel0ny.springboot.exception.OperationFailureException;
+import com.mel0ny.springboot.mapper.CourseMapper;
 import com.mel0ny.springboot.mapper.ScoreMapper;
 import com.mel0ny.springboot.mapper.StudentMapper;
+import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Student;
 import com.mel0ny.springboot.service.StudentService;
 import com.mel0ny.springboot.utils.DataCheckUtil;
@@ -25,6 +27,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private DataCheckUtil dataCheckUtil;
+    @Autowired
+    private CourseMapper courseMapper;
 
     /**
      * 获得所有学生信息
@@ -134,4 +138,30 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
+    /**
+     * 插入学生
+     *
+     * @param student 学生对象
+     */
+    @Override
+    public void insertStudent(Student student) {
+        Student selectStudent = studentMapper.selectStudentByStudentId(student.getStudentId());
+
+        //这里应该检查出来姓名之外的所有字段,但是我不会写,要么就每个都查找过去
+        if (selectStudent != null) {
+            throw new DataErrorException("数据重复");
+        }
+
+        //检查字段合法性
+        String errorMsg = dataCheckUtil.studentChecker(student);
+        if (errorMsg != null) {
+            throw new DataErrorException(errorMsg);
+        }
+
+        int row = studentMapper.insertStudent(student);
+
+        if (row == 0) {
+            throw new OperationFailureException("操作失败");
+        }
+    }
 }

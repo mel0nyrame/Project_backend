@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataCheckUtil {
 
+    /**
+     * 以下的正则表达式均来自于网络
+     */
+
     private boolean hasText(String str) {
         return str != null && !str.trim().isEmpty();
     }
@@ -32,6 +36,12 @@ public class DataCheckUtil {
         return (score < 100.00 && score > 0);
     }
 
+    /**
+     * 学生信息检查
+     *
+     * @param student 学生对象
+     * @return 检查信息
+     */
     public String studentChecker(Student student) {
         if (hasText(student.getStudentName()) && !checkName(student.getStudentName())) {
             return "姓名格式错误:需2-10个中文字符";
@@ -48,6 +58,12 @@ public class DataCheckUtil {
         return null;
     }
 
+    /**
+     * 课程信息检查
+     *
+     * @param course 课程对象
+     * @return 检查信息
+     */
     public String courseChecker(Course course) {
         if (hasText(course.getCourseName()) && !checkName(course.getCourseName())) {
             return "课程名字格式错误:需2-10个中文字符";
@@ -55,6 +71,12 @@ public class DataCheckUtil {
         return null;
     }
 
+    /**
+     * 分数信息检查
+     *
+     * @param score 分数对象
+     * @return 检查信息
+     */
     public String scoreChecker(Score score) {
         if (score.getScore() != null && !checkScore(score.getScore())) {
             return "分数输入错误";

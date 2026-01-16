@@ -4,6 +4,7 @@ import com.mel0ny.springboot.pojo.Course;
 import com.mel0ny.springboot.pojo.Score;
 import com.mel0ny.springboot.pojo.Student;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -101,5 +102,8 @@ public interface ScoreMapper {
      * @return 影响的行数
      */
     int updateScoreByIds(Integer studentId,Integer courseId,Score score);
+
+    @Insert("INSERT INTO score VALUES(#{studentId},#{courseId},#{score})")
+    int insertScore(Score score);
 
 }

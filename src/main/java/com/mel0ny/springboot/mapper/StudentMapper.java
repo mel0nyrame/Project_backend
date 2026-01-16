@@ -2,6 +2,7 @@ package com.mel0ny.springboot.mapper;
 
 import com.mel0ny.springboot.pojo.Student;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -53,5 +54,8 @@ public interface StudentMapper {
      * @return 影响的行数
      */
     int updateStudentByStudentId(Long studentId,Student student);
+
+    @Insert("INSERT INTO student VALUES(#{studentId},#{studentName},#{studentGender},#{studentBirthday},#{studentPhone},#{studentEmail},#{studentMajor})")
+    int insertStudent(Student student);
 
 }
