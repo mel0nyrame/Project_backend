@@ -134,8 +134,10 @@ public class CourseServiceImpl implements CourseService {
      */
     @Override
     public void insertCourse(Course course) {
+        //查询已有的课程
         Course selectCourse = courseMapper.selectCourseByCourseId(course.getCourseId());
 
+        //若存在相同的课程,则报错
         if (selectCourse != null) {
             throw new DataErrorException("数据重复");
         }
@@ -146,8 +148,10 @@ public class CourseServiceImpl implements CourseService {
             throw new DataErrorException(errorMsg);
         }
 
+        //插入课程
         int row = courseMapper.insertCourse(course);
 
+        //如果变化行数为0,则表明操作失败
         if (row == 0) {
             throw new OperationFailureException("操作失败");
         }

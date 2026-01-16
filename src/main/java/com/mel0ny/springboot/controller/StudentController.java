@@ -75,6 +75,12 @@ public class StudentController {
         return Result.success();
     }
 
+    /**
+     * 插入学生信息
+     *
+     * @param student 学生对象
+     * @return Result封装的成功结果
+     */
     @PostMapping("/")
     public Result insertStudent(@RequestBody Student student) {
         studentServiceImpl.insertStudent(student);

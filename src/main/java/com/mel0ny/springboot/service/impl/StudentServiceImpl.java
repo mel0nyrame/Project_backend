@@ -141,6 +141,7 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public void insertStudent(Student student) {
+        //查询已有的学生
         Student selectStudent = studentMapper.selectStudentByStudentId(student.getStudentId());
 
         //这里应该检查出来姓名之外的所有字段,但是我不会写,要么就每个都查找过去
@@ -154,8 +155,10 @@ public class StudentServiceImpl implements StudentService {
             throw new DataErrorException(errorMsg);
         }
 
+        //插入学生
         int row = studentMapper.insertStudent(student);
 
+        //如果变化行数为0,则表明操作失败
         if (row == 0) {
             throw new OperationFailureException("操作失败");
         }

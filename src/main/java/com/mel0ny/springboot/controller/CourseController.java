@@ -63,6 +63,12 @@ public class CourseController {
         return Result.success();
     }
 
+    /**
+     * 增加课程信息
+     *
+     * @param course 课程对象
+     * @return Result封装的成功结果
+     */
     @PostMapping("/")
     public Result insertCourse(@RequestBody Course course) {
         courseServiceImpl.insertCourse(course);

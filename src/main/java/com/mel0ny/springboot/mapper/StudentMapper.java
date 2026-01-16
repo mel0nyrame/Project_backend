@@ -55,6 +55,12 @@ public interface StudentMapper {
      */
     int updateStudentByStudentId(Long studentId,Student student);
 
+    /**
+     * 插入学生信息
+     *
+     * @param student 学生对象
+     * @return 影响的行数
+     */
     @Insert("INSERT INTO student VALUES(#{studentId},#{studentName},#{studentGender},#{studentBirthday},#{studentPhone},#{studentEmail},#{studentMajor})")
     int insertStudent(Student student);
 

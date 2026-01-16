@@ -55,6 +55,12 @@ public interface CourseMapper {
      */
     int updateCourseByCourseId(Long courseId,Course course);
 
+    /**
+     * 插入课程信息
+     *
+     * @param course 课程对象
+     * @return 影响的行数
+     */
     @Insert("INSERT INTO course VALUES(#{courseId},#{courseName})")
     int insertCourse(Course course);
 

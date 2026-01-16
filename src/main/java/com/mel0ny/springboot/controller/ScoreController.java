@@ -64,6 +64,12 @@ public class ScoreController {
         return Result.success();
     }
 
+    /**
+     * 插入成绩信息
+     *
+     * @param score 成绩对象
+     * @return Result封装的成功结果
+     */
     @PostMapping("/")
     public Result insertScore(@RequestBody Score score) {
         scoreServiceImpl.insertScore(score);

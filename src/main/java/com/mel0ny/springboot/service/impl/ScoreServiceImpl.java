@@ -143,20 +143,32 @@ public class ScoreServiceImpl implements ScoreService {
      */
     @Override
     public void insertScore(Score score) {
+        //查询已有的课程
         Course selectCourse = courseMapper.selectCourseByCourseId(score.getCourseId());
 
+        //若课程不存在,则报错
         if (selectCourse == null) {
             throw new DataNoFoundException("课程未找到:" + score.getCourseId());
         }
 
+        //查询已有的学生
         Student selectStudent = studentMapper.selectStudentByStudentId(score.getStudentId());
 
+        //若学生不存在,则报错
         if (selectStudent == null) {
             throw new DataNoFoundException("学生未找到+" + score.getStudentId());
         }
 
+        //检查字段合法性
+        String errorMsg = dataCheckUtil.scoreChecker(score);
+        if (errorMsg != null) {
+            throw new DataErrorException(errorMsg);
+        }
+
+        //插入课程
         int row = scoreMapper.insertScore(score);
 
+        //如果变化行数为0,则表明操作失败
         if (row == 0) {
             throw new OperationFailureException("操作失败");
         }

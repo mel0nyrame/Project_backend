@@ -103,6 +103,12 @@ public interface ScoreMapper {
      */
     int updateScoreByIds(Integer studentId,Integer courseId,Score score);
 
+    /**
+     * 插入成绩信息
+     *
+     * @param score 成绩对象
+     * @return 影响的行数
+     */
     @Insert("INSERT INTO score VALUES(#{studentId},#{courseId},#{score})")
     int insertScore(Score score);
 
