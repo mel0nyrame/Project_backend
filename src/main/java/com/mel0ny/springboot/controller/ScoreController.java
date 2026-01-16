@@ -7,6 +7,8 @@ import com.mel0ny.springboot.service.impl.ScoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/score")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -23,6 +25,18 @@ public class ScoreController {
     @GetMapping("/")
     public Result allScore() {
         return Result.success(scoreServiceImpl.getAllScore());
+    }
+
+    /**
+     * 通过关键词查询成绩信息
+     *
+     * @param keyword 关键词
+     * @return 成绩对象
+     */
+    @GetMapping("/search")
+    public Result searchScores(@RequestParam String keyword) {
+        List<Score> scores = scoreServiceImpl.selectScoreByKeyword(keyword);
+        return Result.success(scores);
     }
 
     /**

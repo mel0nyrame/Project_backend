@@ -34,6 +34,19 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     /**
+     * 通过关键词查询成绩
+     *
+     * @param keyword 关键词
+     * @return 成绩集合
+     */
+    public List<Score> selectScoreByKeyword(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return scoreMapper.allScore();
+        }
+        return scoreMapper.selectScoreByKeyword(keyword.trim());
+    }
+
+    /**
      * 通过学生学号查询学生成绩
      *
      * @param studentId 学生学号

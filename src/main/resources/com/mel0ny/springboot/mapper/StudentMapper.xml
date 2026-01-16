@@ -27,4 +27,20 @@
         </set>
         WHERE student_id = #{studentId}
     </update>
+
+    <!--不会写,PowerBy Kimi-->
+    <select id="selectStudentByKeyword" resultType="com.mel0ny.springboot.pojo.Student">
+        SELECT * FROM student
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                student_id LIKE CONCAT('%', #{keyword}, '%')
+                OR student_name LIKE CONCAT('%', #{keyword}, '%')
+                OR student_phone LIKE CONCAT('%', #{keyword}, '%')
+                OR student_email LIKE CONCAT('%', #{keyword}, '%')
+                OR student_major LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -20,6 +20,14 @@ public interface StudentMapper {
     List<Student> allStudent();
 
     /**
+     * 通过关键词查询学生信息
+     *
+     * @param keyword 关键词
+     * @return 学生集合
+     */
+    List<Student> selectStudentByKeyword(String keyword);
+
+    /**
      * 通过学生学号查询学生信息
      *
      * @param studentId 学生学号

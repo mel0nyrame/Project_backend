@@ -15,4 +15,17 @@
         </set>
         WHERE course_id = #{courseId}
     </update>
+
+    <!--不会写,PowerBy Kimi-->
+    <select id="selectCourseByKeyword" resultType="com.mel0ny.springboot.pojo.Course">
+        SELECT * FROM course
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                CAST(course_id AS CHAR) LIKE CONCAT('%', #{keyword}, '%')
+                OR course_name LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -6,6 +6,8 @@ import com.mel0ny.springboot.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/student")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -23,6 +25,18 @@ public class StudentController {
     @GetMapping("/")
     public Result allStudent() {
         return Result.success(studentServiceImpl.getAllStudent());
+    }
+
+    /**
+     * 通过关键词查询学生信息
+     *
+     * @param keyword 关键词
+     * @return 学生对象
+     */
+    @GetMapping("/search")
+    public Result searchStudents(@RequestParam String keyword) {
+        List<Student> students = studentServiceImpl.selectStudentByKeyword(keyword);
+        return Result.success(students);
     }
 
     /**

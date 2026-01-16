@@ -16,6 +16,14 @@ public interface ScoreService {
     List<Score> getAllScore();
 
     /**
+     * 通过关键词查询成绩
+     *
+     * @param keyword 关键词
+     * @return 成绩集合
+     */
+    List<Score> selectScoreByKeyword(String keyword);
+
+    /**
      * 通过学生学号查询学生成绩
      *
      * @param studentId 学生学号

@@ -35,4 +35,18 @@
         </set>
         WHERE student_id = #{studentId} AND course_id = #{courseId}
     </update>
+
+    <!--不会写,PowerBy Kimi-->
+    <select id="selectScoreByKeyword" resultType="com.mel0ny.springboot.pojo.Score">
+        SELECT * FROM score
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                CAST(student_id AS CHAR) LIKE CONCAT('%', #{keyword}, '%')
+                OR CAST(course_id AS CHAR) LIKE CONCAT('%', #{keyword}, '%')
+                OR CAST(score AS CHAR) LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
 </mapper>

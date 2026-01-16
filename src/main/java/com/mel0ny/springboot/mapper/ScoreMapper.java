@@ -21,6 +21,14 @@ public interface ScoreMapper {
     List<Score> allScore();
 
     /**
+     * 通过关键词查询成绩
+     *
+     * @param keyword 关键词
+     * @return 成绩集合
+     */
+    List<Score> selectScoreByKeyword(String keyword);
+
+    /**
      * 通过学生学号查看成绩数目
      *
      * @param studentId 学生学号

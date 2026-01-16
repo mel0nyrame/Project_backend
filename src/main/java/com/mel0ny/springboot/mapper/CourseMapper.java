@@ -18,6 +18,14 @@ public interface CourseMapper {
     @Select("SELECT course_id,course_name FROM course")
     List<Course> allCourse();
 
+    /**
+     * 通过关键词查询课程信息
+     *
+     * @param keyword 关键词
+     * @return 课程集合
+     */
+    List<Course> selectCourseByKeyword(String keyword);
+
 
     /**
      * 通过课程id查询课程信息

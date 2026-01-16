@@ -37,6 +37,19 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
+     * 通过关键词查询课程信息
+     *
+     * @param keyword 关键词
+     * @return 课程集合
+     */
+    public List<Course> selectCourseByKeyword(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return courseMapper.allCourse();
+        }
+        return courseMapper.selectCourseByKeyword(keyword.trim());
+    }
+
+    /**
      * 通过课程id查询课程信息
      *
      * @param courseId 课程id

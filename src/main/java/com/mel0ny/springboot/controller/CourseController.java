@@ -6,6 +6,8 @@ import com.mel0ny.springboot.service.impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/course")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -22,6 +24,18 @@ public class CourseController {
     @GetMapping("/")
     public Result allCourse() {
         return Result.success(courseServiceImpl.getAllCourse());
+    }
+
+    /**
+     * 通过关键词查询课程信息
+     *
+     * @param keyword 关键词
+     * @return 课程对象
+     */
+    @GetMapping("/search")
+    public Result searchCourses(@RequestParam String keyword) {
+        List<Course> courses = courseServiceImpl.selectCourseByKeyword(keyword);
+        return Result.success(courses);
     }
 
     /**

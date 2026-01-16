@@ -28,9 +28,6 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private DataCheckUtil dataCheckUtil;
 
-    @Autowired
-    private CourseMapper courseMapper;
-
     /**
      * 获得所有学生信息
      *
@@ -50,6 +47,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student selectStudentByStudentId(Long studentId) {
         return studentMapper.selectStudentByStudentId(studentId);
+    }
+
+    /**
+     * 通过关键词查询学生信息
+     *
+     * @param keyword 关键词
+     * @return 学生集合
+     */
+    @Override
+    public List<Student> selectStudentByKeyword(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return studentMapper.allStudent();
+        }
+        return studentMapper.selectStudentByKeyword(keyword.trim());
     }
 
 
