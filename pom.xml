@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mel0ny</groupId>
-    <artifactId>Backend</artifactId>
+    <artifactId>student-score-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Backend</name>
-    <description>Backend</description>
+    <name>Student Score Management</name>
+    <description>Full-stack student, course, and score management system</description>
     <url/>
     <licenses>
         <license/>
